@@ -95,20 +95,7 @@ class TestRegistration < Test::Unit::TestCase # our file
     end
     @driver.find_element(:id, 'member-add-submit').click
     sleep 5
-
-    @driver.find_element(:id, 'tab-members').click
-    @driver.find_element(:class, 'icon-add').click
-    sleep 2
-
-    @driver.find_element(:id, 'principal_search').send_keys 'login'
-    sleep 2
-    @driver.find_element(:css, '[value="164911"]').click
-    sleep 3
-
-    @driver.find_elements(css: 'input[value="5"]').each do |role|
-      role.click if role.displayed?
-    end
-    sleep 3
+    
 
     @driver.find_element(:class, 'icon-edit').click
 
