@@ -95,9 +95,13 @@ class TestRegistration < Test::Unit::TestCase # our file
     end
     @driver.find_element(:id, 'member-add-submit').click
     sleep 5
-    
 
-    @driver.find_element(:class, 'icon-edit').click
+
+    @driver.find_elements(css: ".member .buttons .icon-edit").first.click
+    @driver.find_elements(css: 'input[value="3"]').each do |role|
+      role.click if role.displayed?
+    end
+#    @driver.find_element(:name, 'commit').click
 
   end
 
