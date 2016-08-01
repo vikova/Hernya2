@@ -101,7 +101,11 @@ class TestRegistration < Test::Unit::TestCase # our file
     @driver.find_elements(css: 'input[value="3"]').each do |role|
       role.click if role.displayed?
     end
-#    @driver.find_element(:name, 'commit').click
+    @driver.find_elements(css: 'input[value="4"]').each do |role|
+      role.click if role.displayed?
+    end
+    sleep 3
+    @driver.find_element(:class, 'small').click
 
   end
 
