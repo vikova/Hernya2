@@ -99,21 +99,22 @@ class TestRegistration < Test::Unit::TestCase # our file
     create_project
 
     @driver.find_element(:id, 'tab-versions').click
-    sleep 5
+    sleep 2
 
     #@driver.find_element(:class, 'icon-add').click
 
-    @driver.find_elements(:class, 'icon-add').each do |versions|
+    @driver.find_elements(css: '.icon-add').each do |versions|
       versions.click if versions.displayed?
     end
+    sleep 5
 
+   @driver.find_element(:name, 'version[name]').send_keys 'hfhfhh'
 
-#    @driver.find_element(:id, 'version_name').send_keys 'hfhfhh'
- #   @driver.find_element(:name, 'commit').click
+    @driver.find_element(:name, 'commit').click
 
-  #  expected_test = 'Создание успешно.'
- #   actual_test = @driver.find_element(:id, 'flash_notice').text
-   # assert_equal(expected_test, actual_test)
+    expected_test = 'Создание успешно.'
+    actual_test = @driver.find_element(:id, 'flash_notice').text
+    assert_equal(expected_test, actual_test)
 
   end
 
@@ -123,7 +124,43 @@ class TestRegistration < Test::Unit::TestCase # our file
     sleep 3
 
     @driver.find_element(:id, 'issue_tracker_id').click
-    @driver.find_elements(css: 'option[value="1"]').each do |option|
+    @driver.find_elements(css: '#issue_tracker_id option[value="1"]').each do |option|
+      option.click if option.displayed?
+
+    end
+    sleep 3
+    @driver.find_element(:id, 'issue_subject').send_keys 'new'
+
+    @driver.find_element(:name, 'commit').click
+
+
+
+
+
+    @driver.find_element(:class, 'new-issue').click
+    sleep 3
+
+    @driver.find_element(:id, 'issue_tracker_id').click
+    @driver.find_elements(css: '#issue_tracker_id option[value="2"]').each do |option|
+      option.click if option.displayed?
+
+    end
+    sleep 3
+    @driver.find_element(:id, 'issue_subject').send_keys 'new'
+
+    @driver.find_element(:name, 'commit').click
+
+
+
+
+
+
+
+    @driver.find_element(:class, 'new-issue').click
+    sleep 3
+
+    @driver.find_element(:id, 'issue_tracker_id').click
+    @driver.find_elements(css: '#issue_tracker_id option[value="3"]').each do |option|
       option.click if option.displayed?
 
     end
