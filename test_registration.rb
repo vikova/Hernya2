@@ -113,13 +113,11 @@ class TestRegistration < Test::Unit::TestCase # our file
     create_project
 
     @driver.find_element(:id, 'tab-versions').click
+
     sleep 2
 
-    #@driver.find_element(:class, 'icon-add').click
 
-    @driver.find_elements(css: '.icon-add').each do |versions|
-      versions.click if versions.displayed?
-    end
+    @driver.find_element(:css, '#tab-content-versions .icon-add').click
     sleep 5
 
    @driver.find_element(:name, 'version[name]').send_keys 'hfhfhh'
