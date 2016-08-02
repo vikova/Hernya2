@@ -77,6 +77,9 @@ class TestRegistration < Test::Unit::TestCase # our file
 
     @driver.find_element(:id, 'member-add-submit').click
 
+    test_user = @driver.find_element(:css, '[value="164911"]')
+    assert(test_user.displayed?)
+
   end
 
   def test_edit_their_roles
@@ -106,6 +109,9 @@ class TestRegistration < Test::Unit::TestCase # our file
     end
     sleep 3
     @driver.find_element(:class, 'small').click
+
+    user_role = @driver.find_element(:css, 'input[value="4"]')
+    assert(user_role.displayed?)
 
   end
 
@@ -175,6 +181,28 @@ class TestRegistration < Test::Unit::TestCase # our file
     flash_notice = @driver.find_element(:id, 'flash_notice')
 
     assert(flash_notice.displayed?)
+
+  end
+
+  def test_isues_visible
+    create_project
+    @driver.find_element(:class, 'new-issue').click
+    sleep 3
+
+    @driver.find_element(:id, 'issue_tracker_id').click
+    @driver.find_elements(css: '#issue_tracker_id option[value="1"]').each do |option|
+      option.click if option.displayed?
+
+    end
+    sleep 3
+    @driver.find_element(:id, 'issue_subject').send_keys 'new'
+
+    @driver.find_element(:name, 'commit').click
+
+    flash_notice = @driver.find_element(:id, 'flash_notice')
+
+    assert(flash_notice.displayed?) == false
+
 
   end
 
